@@ -1,80 +1,74 @@
-/// embedded python example
 Class ObjectScript.Embbeded.Python Extends %SwizzleObject
 {
 
-/// HelloWorld with a parameter
-ClassMethod HelloWorld(name As %String = "toto") As %Boolean [ Language = python ]
+ClassMethod HelloWorld(name As %String = "Toto") As %Boolean [ Language = python ]
 {
-    print("Hello",name)
+    print("Hello " + name + "!")
     return True
 }
 
-/// Description
-Method compare(modèle, chaine) As %Status [ Language = python ]
+Method compare(model, chain) As %Status [ Language = python ]
 {
+    # We use the Regular Expressions Operations module
     import re
 
-    # compare la chaîne [chaîne] au modèle [modèle]
-    # affichage résultats
-    print(f"\nRésultats({chaine},{modèle})")
-    match = re.match(modèle, chaine)
+    # Compare the chain [chain] to the model [model]
+    # Display results with f-strings
+    print(f"\nResults({chain},{model})")
+    match = re.match(model, chain)
     if match:
         print(match.groups())
     else:
-        print(f"La chaîne [{chaine}] ne correspond pas au modèle [{modèle}]")
+        print(f"The chain [{chain}] doesn't match the model [{model}]")
 }
 
-/// Description
-Method compareObjectScript(modèle, chaine) As %Status
+Method compareObjectScript(model, chain) As %Status
 {
-    w !,"Résultats("_chaine_","_modèle_")",!
-    set matcher=##class(%Regex.Matcher).%New(modèle)                             
-    set matcher.Text=chaine
+    w !,"Results("_chain_","_model_")",!
+    set matcher=##class(%Regex.Matcher).%New(model)                             
+    set matcher.Text=chain
     if matcher.Locate() {
         write matcher.GroupGet(1)
     }
     else {
-        w "La chaîne ["_chaine_"] ne correspond pas au modèle ["_modèle_"]"
+        w "The chain ["_chain_"] does not match the model ["_model_"]"
     }
 }
 
-/// Description
 Method DemoPythonToPython() As %Status [ Language = python ]
 {
-    # expression régulières en python
-    # récupérer les différents champs d'une chaîne
-    # le modèle : une suite de chiffres entourée de caractères quelconques
-    # on ne veut récupérer que la suite de chiffres
-    modèle = r"^.*?(\d+).*?$"
+    # Regular Expressions in python
+    # the pattern : a sequence of numbers surrounded by any characters
+    # we want only to retrieve the sequence of digits
+    model = r"^.*?(\d+).*?$"
 
-    # on confronte la chaîne au modèle
-    self.compare(modèle, "xyz1234abcd")
-    self.compare(modèle, "12 34")
-    self.compare(modèle, "abcd")
+    # we compare the string to the model
+    self.compare(model, "xyz1234abcd")
+    self.compare(model, "12 34")
+    self.compare(model, "abcd")
 }
 
 Method DemoPythonToObjectScript() As %Status [ Language = python ]
 {
-    # expression régulières en python
-    # récupérer les différents champs d'une chaîne
-    # le modèle : une suite de chiffres entourée de caractères quelconques
-    # on ne veut récupérer que la suite de chiffres
-    modèle = r"^.*?(\d+).*?$"
+    # Regular Expressions in Python
+    # retrieve the different fields of a string
+    # the pattern : a sequence of digits surrounded by any characters
+    # we want only to retrieve the sequence of digits
+    model = r"^.*?(\d+).*?$"
 
-    # on confronte la chaîne au modèle
-    self.compareObjectScript(modèle, "xyz1234abcd")
-    self.compareObjectScript(modèle, "12 34")
-    self.compareObjectScript(modèle, "abcd")
+    # comparing the chain to the model:
+    self.compareObjectScript(model, "xyz1234abcd")
+    self.compareObjectScript(model, "12 34")
+    self.compareObjectScript(model, "abcd")
 }
 
-/// Description
 Method DemoObjectScriptToPython() As %Status
 {
-    // le modèle - une date au format jj/mm/aa
-    set modèle = "^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$"
-    do ..compare(modèle, "10/05/97")
-    do ..compare(modèle, " 04/04/01 ")
-    do ..compare(modèle, "5/1/01")
+    // the model : date format dd/mm/yy
+    set model = "^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$"
+    do ..compare(model, "10/05/97")
+    do ..compare(model, " 04/04/01 ")
+    do ..compare(model, "5/1/01")
 }
 
 }
