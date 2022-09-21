@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  iris:
+    image: iris-python
+    build:
+      context: ./
+      dockerfile : Dockerfile
+      args:
+        - IRIS_PASSWORD=${IRIS_PASSWORD:-SYS}
+    command: --check-caps false
+    volumes:
+      - ./:/irisdev/app/
+    environment:
+      - ISC_CPF_MERGE_FILE=/irisdev/app/merge.cpf
+    ports:
+    - 52775:52773
+    - 51776:1972
+    - 4040:8080
+    - 4041:8081
+    - 8888:8888
+
