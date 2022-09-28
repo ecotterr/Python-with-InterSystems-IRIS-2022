@@ -5,7 +5,7 @@ Class Gateway.Python
 /// Demo
 ClassMethod Demo() As %Status
 {
-    Set sc = $$$OK
+    set sc = $$$OK
 
     set pyGate = $system.external.getPythonGateway()
 

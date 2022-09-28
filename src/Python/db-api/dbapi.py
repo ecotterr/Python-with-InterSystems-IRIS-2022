@@ -1,6 +1,8 @@
 # Thanks to Raj Singh for this example in Global Summit 2022.
 # https://github.com/isc-rsingh/iris-python-2022
 
+# DB-API is great for SQL-based access to your IRIS database
+
 import iris as dbapi
 
 mytable = "mypydbapi.test_things"

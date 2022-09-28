@@ -1,12 +1,14 @@
 # Inspired by the "globals-mindmap" contest entry by Yuri Marx
 # https://openexchange.intersystems.com/package/global-mindmap
 
+# Native API gives direct access to IRIS Globals as well as ObjectScript methods + routines
+
 import irisnative
 
 # Make connection to InterSystems IRIS database
 connection = irisnative.createConnection("localhost", 1972, "USER", "SuperUser", "SYS")
 
-# Write a JSON object to globals
+# Function to write a JSON object to globals
 def writeJSON(jo, irisnc):
     for key in jo:
         irisnc.set(jo[key], "^mymindmap", jo["id"], key)
