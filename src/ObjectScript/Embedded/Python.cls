@@ -25,7 +25,7 @@ Method compare(model, chain) As %Status [ Language = python ]
 Method compareObjectScript(model, chain) As %Status
 {
     w !,"Results("_chain_","_model_")",!
-    set matcher=##class(%Regex.Matcher).%New(model)                             
+    set matcher=##class(%Regex.Matcher).%New(model)
     set matcher.Text=chain
     if matcher.Locate() {
         write matcher.GroupGet(1)
