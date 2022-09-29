@@ -21,5 +21,8 @@ samplegrandchild = {"id":"3","topic":"Pride and Prejudice","parent":"2"}
 myIris = irisnative.createIris(connection)
 
 st = writeJSON(samplemap, myIris)
+print(st)
 st = writeJSON(samplechild, myIris)
+print(st)
 st = writeJSON(samplegrandchild, myIris)
+print(st)
