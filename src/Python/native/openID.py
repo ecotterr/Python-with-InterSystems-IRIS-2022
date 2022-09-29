@@ -9,6 +9,10 @@ myIris = irisnative.createIris(connection)
 passenger = myIris.classMethodObject("Titanic.Table.Passenger","%OpenId",1)
 print(passenger.get("name"))
 
-# Set and Print Global
+# Set and Print Globals
 myIris.set("hello","myGlobal")
 print(myIris.get("myGlobal"))
+
+print(myIris.get("^mymindmap(1)"))
+print(myIris.get("^mymindmap(2)"))
+print(myIris.get("^mymindmap(3)"))
