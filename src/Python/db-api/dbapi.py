@@ -3,21 +3,21 @@
 
 # DB-API is great for SQL-based access to your IRIS database
 
-import iris as dbapi
+import iris
 
 mytable = "mypydbapi.test_things"
 
-# Create connection to IRIS
-conn = dbapi.connect(hostname='localhost', port=1972, namespace='USER', username='SuperUser', password='SYS')
+# Create connectionection to IRIS
+connection = iris.connect(hostname="localhost", port=1972, namespace="USER", username="SuperUser", password="SYS")
 
 # Create table with cursor
-cursor = conn.cursor()
+cursor = connection.cursor()
 try:
   cursor.execute(f"CREATE TABLE {mytable} (myvarchar VARCHAR(255), myint INTEGER, myfloat FLOAT)")
 except Exception as inst:
   pass
 cursor.close()
-conn.commit()
+connection.commit()
 
 # Create some data to fill in
 chunks = []
@@ -32,15 +32,15 @@ chunks.append(paramSequence)
 query = f"INSERT INTO {mytable} (myvarchar, myint, myfloat) VALUES (?, ?, ?)"
 
 for chunk in chunks:
-  cursor = conn.cursor()
+  cursor = connection.cursor()
   cursor.executemany(query, chunk)
   cursor.close()
-  conn.commit()
-# conn.close()
+  connection.commit()
+# connection.close()
 
 sql = f"select * from {mytable}"
 rowsRead = 0
-cursor = conn.cursor()
+cursor = connection.cursor()
 cursor.arraysize = 20
 
 cursor.execute(sql)
@@ -51,4 +51,4 @@ for row in rows:
 rowsRead += len(rows)
 
 cursor.close()
-conn.close()
+connection.close()

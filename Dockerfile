@@ -1,4 +1,4 @@
-ARG IMAGE=intersystemsdc/irishealth-community:latest
+ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2022.2.0.345.0
 
 FROM $IMAGE
 USER root
@@ -20,11 +20,11 @@ USER ${ISC_PACKAGE_MGRUSER}
 # Copy source files to image
 COPY . /opt/irisapp
 
-# load demo
+# Start IRIS and load demo
 RUN iris start IRIS \
 	&& iris session IRIS < /opt/irisapp/iris.script && iris stop IRIS quietly
 
-# create Python env
+# Create Python environment
 ENV PYTHON_PATH=/usr/irissys/bin/irispython
 ENV SRC_PATH=/opt/irisapp
 ENV IRISUSERNAME "SuperUser"
@@ -35,7 +35,6 @@ ENV IRISNAMESPACE "USER"
 # Requirement for embedded python
 RUN pip3 install -r ${SRC_PATH}/src/Python/requirements.txt
 
-# Install Native API
-# For now Native API wheel is not embedded in container
-COPY misc/intersystems_irispython-3.2.0-py3-none-any.whl /usr/irissys/dev/python/intersystems_irispython-3.2.0-py3-none-any.whl
-RUN pip3 install /usr/irissys/dev/python/intersystems_irispython-3.2.0-py3-none-any.whl
+# Install IRIS-Python wheel for DB-API and Native API
+COPY intersystems_irispython-3.2.0-py3-none-any.whl intersystems_irispython-3.2.0-py3-none-any.whl
+RUN pip install intersystems_irispython-3.2.0-py3-none-any.whl
