@@ -11,11 +11,15 @@ Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon whic
 # 2. Starting this demo:
 Please ensure you have Docker Desktop and Git installed wherever you wish to run this demo. This guide will assume you are using Visual Studio Code with the Docker Extension installed.
 
-``` git clone https://github.com/ISCecotterr/iris-python-demo ```
+``` 
+git clone https://github.com/ISCecotterr/iris-python-demo 
+```
 
 Then in your cloned directory:
 
-``` docker-compose up -d ```
+```
+docker-compose up -d 
+```
 
 In VS Code Docker Extension, right-click the container "iris-python-demo" and choose to "Attach Shell".
 
@@ -51,6 +55,8 @@ To run this, go to the container command line and run:
 
 You can view the results of the script in the System Explorer tab of the Management Portal.
 
+Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BTPI_pyapi
+
 ## 3.3. Python Gateway
 *src > ObjectScript > Gateway > Python.cls*
 
@@ -69,6 +75,9 @@ Ensure you are in the USER namespace with ```set $namespace = "USER"```
 
 You can then exit the IRIS terminal with ```halt```
 
+Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BEXTSERV_intro
+
+
 ## 3.4. Native API
 *src > Python > native > mindmap.py*
 
@@ -85,3 +94,5 @@ To run this, go to the container command line and run:
 2. ```python3 openID.py```
 3. ```python3 mindmap.py```
 4. ```python3 openID.py```
+
+Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=PAGE_python_native&ADJUST=1
