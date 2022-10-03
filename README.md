@@ -20,3 +20,5 @@ docker-compose up -d
 ```
 
 In Visual Studio Code, right-click the container "iris-python-demo" and choose to "Attach Shell".
+
+Now you can use the command line in the container and use ```irissession IRIS``` to access the IRIS terminal, and run ObjectScript commands.
