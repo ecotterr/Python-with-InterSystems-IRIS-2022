@@ -39,7 +39,3 @@ RUN pip3 install -r ${SRC_PATH}/src/Python/requirements.txt
 # For now Native API wheel is not embedded in container
 COPY misc/intersystems_irispython-3.2.0-py3-none-any.whl /usr/irissys/dev/python/intersystems_irispython-3.2.0-py3-none-any.whl
 RUN pip3 install /usr/irissys/dev/python/intersystems_irispython-3.2.0-py3-none-any.whl
-
-# Install objectscript kernel
-RUN mkdir /home/irisowner/.local/share/jupyter/kernels/objectscript
-COPY misc/kernels/objectscript/* /home/irisowner/.local/share/jupyter/kernels/objectscript/
