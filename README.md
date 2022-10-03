@@ -1,12 +1,10 @@
 # 1. Using Python with InterSystems IRIS
 Presented at UK&I Summit, October 2022.
 Demo showing various ways to use Python with InterSystems IRIS Data Platform:
-* Embedded Python (available for 2021.2 +)
-* DB-API (available for 2022.1 +)
+* Embedded Python
+* DB-API
 * Python Gateway
 * IRIS Native API
-
-Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon which this was built, as well as Raj Singh @isc-rsingh for some sample code from his Global Summit 2022 presentation on the subject.
 
 # 2. Starting this demo:
 Please ensure you have Docker Desktop and Git installed wherever you wish to run this demo. This guide will assume you are using Visual Studio Code with the Docker Extension installed.
@@ -96,3 +94,8 @@ To run this, go to the container command line and run:
 4. ```python3 openID.py```
 
 Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=PAGE_python_native&ADJUST=1
+
+# Notes
+Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon which this was built, as well as Raj Singh @isc-rsingh for some sample code from his Global Summit 2022 presentation on the subject.
+
+Presented for InterSystems UK & Ireland Summit, 19th October 2022 by Elijah Cotterrell
