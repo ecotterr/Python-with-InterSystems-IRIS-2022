@@ -62,12 +62,16 @@ The Demo() ClassMethod of this Class shows step-by-step how to:
 
 To run this, go to the container command line and run:
 1. ```irissession IRIS```
+
 Ensure you are in the USER namespace with ```set $namespace = "USER"```
+
 2. ```do ##class(Gateway.Python).Demo()```
+
 You can then exit the IRIS terminal with ```halt```
 
 ## 3.4. Native API
 *src > Python > native > mindmap.py*
+
 *src > Python > native > openID.py*
 
 The mindmap.py code shows how to:
