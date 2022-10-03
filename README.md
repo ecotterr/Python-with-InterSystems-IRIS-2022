@@ -21,7 +21,7 @@ In VS Code Docker Extension, right-click the container "iris-python-demo" and ch
 
 Now you can use the command line in the container and use ```irissession IRIS``` to access the IRIS terminal, and run ObjectScript commands.
 
-To view the Management Portal, go to http://localhost:52775/csp/sys/UtilHome.csp
+To view the Management Portal, go to http://localhost:52775/csp/sys/UtilHome.csp and login with username: _System, password: SYS
 
 # 3. Exploring this demo:
 The *src > Python* directory contains the .py scripts used for the various examples.
@@ -50,3 +50,34 @@ To run this, go to the container command line and run:
 2. ```python3 dbapi.py```
 
 You can view the results of the script in the System Explorer tab of the Management Portal.
+
+## 3.3. Python Gateway
+*src > ObjectScript > Gateway > Python.cls*
+
+The Demo() ClassMethod of this Class shows step-by-step how to:
+* Create a Python Gateway connection to IRIS
+* Add a .py file to the Gateway paths
+* Create proxy objects from Python objects
+* Access properties of the proxy objects with ObjectScript
+
+To run this, go to the container command line and run:
+1. ```irissession IRIS```
+Ensure you are in the USER namespace with ```set $namespace = "USER"```
+2. ```do ##class(Gateway.Python).Demo()```
+You can then exit the IRIS terminal with ```halt```
+
+## 3.4. Native API
+*src > Python > native > mindmap.py*
+*src > Python > native > openID.py*
+
+The mindmap.py code shows how to:
+* Create a Native API connection to IRIS
+* Write JSON to Globals, with a defined structure
+
+The openID.py code writes the Globals.
+
+To run this, go to the container command line and run:
+1. ```cd /src/Python/native```
+2. ```python3 openID.py```
+3. ```python3 mindmap.py```
+4. ```python3 openID.py```
