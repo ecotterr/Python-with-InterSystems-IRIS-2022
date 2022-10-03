@@ -8,7 +8,7 @@ import iris as dbapi
 mytable = "mypydbapi.test_things"
 
 # Create connection to IRIS
-conn = dbapi.connect(hostname='localhost', port=1972, namespace='IRISAPP', username='_SYSTEM', password='SYS')
+conn = dbapi.connect(hostname='localhost', port=1972, namespace='USER', username='SuperUser', password='SYS')
 
 # Create table with cursor
 cursor = conn.cursor()
