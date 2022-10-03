@@ -19,7 +19,7 @@ Then in your cloned directory:
 docker-compose up -d 
 ```
 
-In VS Code Docker Extension, right-click the container "iris-python-demo" and choose to "Attach Shell".
+In VS Code Docker Extension, right-click the container and choose to "Attach Shell".
 
 Now you can use the command line in the container and use ```irissession IRIS``` to access the IRIS terminal, and run ObjectScript commands.
 
