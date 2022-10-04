@@ -1,4 +1,4 @@
-Class ObjectScript.Embbeded.Python Extends %SwizzleObject
+Class ObjectScript.Embedded.Python Extends %SwizzleObject
 {
 
 ClassMethod HelloWorld(name As %String = "Toto") As %Boolean [ Language = python ]
