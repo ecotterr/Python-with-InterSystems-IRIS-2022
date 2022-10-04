@@ -30,7 +30,6 @@ ENV SRC_PATH=/opt/irisapp
 ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "USER"
-#ENV PATH "/usr/irissys/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/irisowner/bin"
 
 # Requirement for embedded python
 RUN pip3 install -r ${SRC_PATH}/src/Python/requirements.txt

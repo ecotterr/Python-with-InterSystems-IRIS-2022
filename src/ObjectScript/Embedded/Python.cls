@@ -1,7 +1,7 @@
-Class ObjectScript.Embedded.Python Extends %SwizzleObject
+Class ObjectScript.Embedded.Examples Extends %SwizzleObject
 {
 
-ClassMethod HelloWorld(name As %String = "Toto") As %Boolean [ Language = python ]
+ClassMethod HelloWorld(name As %String = "World") As %Boolean [ Language = python ]
 {
     print("Hello " + name + "!")
     return True
@@ -12,7 +12,7 @@ Method compare(model, chain) As %Status [ Language = python ]
     # We use the Regular Expressions Operations module
     import re
 
-    # Compare the chain [chain] to the model [model]
+    # Compare the chain to the model
     # Display results with f-strings
     print(f"\nResults({chain},{model})")
     match = re.match(model, chain)
