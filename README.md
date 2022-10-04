@@ -10,7 +10,7 @@ Demo showing various ways to use Python with InterSystems IRIS Data Platform:
 Please ensure you have Docker Desktop and Git installed wherever you wish to run this demo. This guide will assume you are using Visual Studio Code with the Docker Extension installed.
 
 ``` 
-git clone https://github.com/ISCecotterr/iris-python-demo 
+git clone https://github.com/ISCecotterr/Python-with-InterSystems-IRIS-2022
 ```
 
 Then in your cloned directory:
