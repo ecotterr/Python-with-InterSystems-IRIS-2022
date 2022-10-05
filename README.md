@@ -31,11 +31,25 @@ The *src > Python* directory contains the .py scripts used for the various examp
 The *src > ObjectScript* directory similarly contains the classes needed to support these.
 
 ## 3.1. Embedded Python
-*src > ObjectScript > Embedded > Python.cls*
+*src > ObjectScript > Embedded > Networks.cls*
 
-This class contains a large selection of Class and Instance Methods written in Python with ObjectScript wrappers. These can of course be called from the IRIS terminal, for example:
+This class demonstrates how to:
+* Create methods written in Python
+* Store data generated from Python into IRIS Globals, with structure.
+* Retrieve data from those Globals with Python methods
+* Kill globals with Python methods
 
-```do ##class(ObjectScript.Embedded.Python).HelloWorld("GitHub User")```
+First, access the IRIS terminal: ```irissession IRIS```
+
+Create the network:
+
+1. ```do ##class(ObjectScript.Embedded.Networks).CreateNetwork(15)```
+
+To view the data now in globals:
+
+2. ```do ##class(ObjectScript.Embedded.Networks).ShowNetwork()```
+
+In section 3.4, we will access these globals with the Native API...
 
 Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AFL_epython 
 
@@ -77,25 +91,21 @@ Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?
 
 
 ## 3.4. Native API
-*src > Python > native > mindmap.py*
+*src > Python > native > Networks.py*
 
-*src > Python > native > openID.py*
+We now use the Native API to access the network globals created with Embedded Python and generate PNG files to illustrate the graphs.
 
-The mindmap.py code shows how to:
-* Create a Native API connection to IRIS
-* Write JSON to Globals, with a defined structure
+In the container terminal, run:
+1. ```cd src/Python/native```
+2. ```python3 Networks.py```
 
-The openID.py code writes the Globals.
+The graph image will have been saved in /irisdev/app/Network.png and can be copied locally (from your local terminal, not the container terminal) with:
 
-To run this, go to the container command line and run:
-1. ```cd /src/Python/native```
-2. ```python3 openID.py```
-3. ```python3 mindmap.py```
-4. ```python3 openID.py```
+```docker cp <containerId>:/irisdev/app/Network.png /Your-Local-Path/Network.png```
 
 Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=PAGE_python_native&ADJUST=1
 
 # Notes
-Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon which this was built, as well as Raj Singh @isc-rsingh for some sample code from his Global Summit 2022 presentation on the subject.
+Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon which this was built, as well as Yuhang Xia for some of the networkx code.
 
 Presented for InterSystems UK & Ireland Summit, 19th October 2022 by Elijah Cotterrell
