@@ -15,6 +15,7 @@ ClassMethod RandomStorage(num As %Integer) As %Status [language = python]
     randGlobal = iris.gref("^randGlobal")
     for key in samples:
         i += 1
+        key = float(key)
         randGlobal.set([i], key)
     return True
 }
@@ -33,7 +34,20 @@ ClassMethod RandomStorageRetrieve(id As %Integer) As %Status [language = python]
     else:
         suffix = "th"
 
-    print(f"The {id}'{suffix} generated number is {result}.")
+    print(f"The {id} {suffix} generated number is {result}.")
+}
+
+ClassMethod EmptyStorage() As %Status [language = python]
+{
+    import iris
+
+    try:
+        randGlobal = iris.gref("^randGlobal")
+        randGlobal.kill([]) #kills all descendants as well
+        print("Storage emptied.")
+    except:
+        print("Storage has already been emptied!")
+
 }
 
 }
