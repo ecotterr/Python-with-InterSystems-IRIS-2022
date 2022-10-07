@@ -4,6 +4,7 @@
 import irisnative
 import networkx as nx
 import matplotlib.pyplot as plt
+import json
 
 # Make connection to IRIS; parameters are (hostname, port, namespace, username, password)
 connection = irisnative.createConnection("localhost", 1972, "USER", "SuperUser", "SYS")
@@ -25,12 +26,15 @@ key = ""
 neighbour_list_all = []
 while key != None:
     neighbour_list = myIris.get(f"^nodeGlobal({i})")
-    neighbour_list_all.append(neighbour_list)
-    # Using the nextSubscript() method to traverse the sibling nodes of ^nodeGlobal(0)
-    key = myIris.nextSubscript(0,f"^nodeGlobal({i})") # if key == None, there are no more sibling nodes
+    # Remember to convert back from JSON to a Python list, or else our append won't work as intended
+    neighbour_list_all.append(json.loads(neighbour_list))
+    # Using the nextSubscript() method to traverse the sibling nodes of ^nodeGlobal(0) in ascending order (works like $order in ObjectScript)
+    key = myIris.nextSubscript(False,f"^nodeGlobal({i})") # if key == None, there are no more sibling nodes
     print("Node " + str(i) + " has neighbours: " + str(neighbour_list))
     i += 1
+print("Found " + str(i) + " nodes!")
 
+print("\n" + str(neighbour_list_all))
 # Recreating the network:
 # Thanks to Yuhang Xia for the following code and expertise on networkx
 

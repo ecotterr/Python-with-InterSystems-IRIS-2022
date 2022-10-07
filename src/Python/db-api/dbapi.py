@@ -7,7 +7,7 @@ import iris
 
 mytable = "mypydbapi.test_things"
 
-# Create connectionection to IRIS
+# Create connection to IRIS
 connection = iris.connect(hostname="localhost", port=1972, namespace="USER", username="SuperUser", password="SYS")
 
 # Create table with cursor
