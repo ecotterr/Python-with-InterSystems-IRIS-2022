@@ -17,7 +17,7 @@
     zw $SYSTEM.OBJ.ImportDir("/opt/irisapp/src", "*.cls", "cubk", .tErrors, 1)
     // Install csvgen package
     zpm "install csvgen"
-    // Load Titanic data
-    do ##class(community.csvgen).Generate("/opt/irisapp/misc/titanic.csv",,"Titanic.Table.Passenger")
+    // Load XRP data
+    do ##class(community.csvgen).Generate("/opt/irisapp/misc/XRP-GBP.csv",,"ObjectScript.Coin")
 
     h

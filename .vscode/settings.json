@@ -16,6 +16,7 @@
         "Notebooks": "http://localhost:8888"
       },
       "active": true
-    }
+    },
+    "git.ignoreLimitWarning": true
 
 }

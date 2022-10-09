@@ -1,4 +1,5 @@
-ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2022.2.0.345.0
+ARG IMAGE=intersystemsdc/irishealth-community:latest
+#ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2022.2.0.345.0
 
 FROM $IMAGE
 USER root
@@ -31,8 +32,7 @@ ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "USER"
 
-# Requirement for embedded python
-RUN pip3 install -r ${SRC_PATH}/src/Python/requirements.txt
+RUN pip3 install -r ${SRC_PATH}/src/Python/requirements.txt 
 
 # Install IRIS-Python wheel for DB-API and Native API
 COPY intersystems_irispython-3.2.0-py3-none-any.whl intersystems_irispython-3.2.0-py3-none-any.whl
