@@ -1,19 +1,17 @@
-Class ObjectScript.Coin Extends %Persistent
+Class ObjectScript.Coin Extends (%Library.Persistent, %JSON.Adaptor)
 {
 
-Property Date As %String;
+Property Date As %String [ SqlColumnNumber = 2 ];
 
-Property Open As %Numeric;
+Property Open As %Numeric [ SqlColumnNumber = 3 ];
 
-Property High As %Numeric;
+Property High As %Numeric [ SqlColumnNumber = 4 ];
 
-Property Low As %Numeric;
+Property Low As %Numeric [ SqlColumnNumber = 5 ];
 
-Property Close As %Numeric;
+Property Close As %Numeric [ SqlColumnNumber = 6 ];
 
-Property Volume As %Numeric;
-
-Property MarketCap As %Numeric;
+Property Volume As %Numeric [ SqlColumnNumber = 7 ];
 
 Storage Default
 {
@@ -38,9 +36,6 @@ Storage Default
 </Value>
 <Value name="7">
 <Value>Volume</Value>
-</Value>
-<Value name="8">
-<Value>MarketCap</Value>
 </Value>
 </Data>
 <DataLocation>^ObjectScript.CoinD</DataLocation>

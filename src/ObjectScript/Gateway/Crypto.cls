@@ -8,11 +8,12 @@ ClassMethod GetCoinValues()
     // Creating default Python gateway connection
     set pyGate = $system.external.getPythonGateway()
 
-    // Add Address.py path to the gateway
+    // Add Crypto.py path to the gateway
     do pyGate.addToPath("/irisdev/app/src/Python/gateway/Crypto.py")
 
     // Create the proxy object for the instantiated object
     set objectBase = ##class(%Net.Remote.Object).%New(pyGate,"coin")
+    write "Proxy object generated."
 
     // Access the properties
     set Date = objectBase.Date
@@ -21,10 +22,9 @@ ClassMethod GetCoinValues()
     set Low = objectBase.Low
     set Close = objectBase.Close
     set Volume = objectBase.Volume
-    set MarketCap = objectBase.MarketCap
-    
+
     // Write result
-    zw Date zw Open zw High zw Low zw Close zw Volume zw MarketCap
+    w "Date: "_Date w "Open: "_Open w "High: "_High w "Low: "_Low w "Close_:"_Close w "Volume: "_Volume
     
     // Persisting the data for later
     set coin = ##class(ObjectScript.Coin).%New()
@@ -34,9 +34,8 @@ ClassMethod GetCoinValues()
     set coin.Low = Low
     set coin.Close = Close
     set coin.Volume = Volume
-    set coin.MarketCap = MarketCap
     do coin.%Save()
-    w "Coin saved with id value: "_coin.Id
+    write "Values saved."
 
     return sc
 }

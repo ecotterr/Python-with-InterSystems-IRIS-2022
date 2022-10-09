@@ -1,6 +1,6 @@
-    zn "%SYS"
+    set $namespace = "%SYS"
     // Allow SuperUser/SYS
-    Do ##class(Security.Users).UnExpireUserPasswords("*")
+    do ##class(Security.Users).UnExpireUserPasswords("*")
 
     // Allow service callin for embbeded python
     do ##class(Security.Services).Get("%Service_CallIn",.prop)
@@ -12,12 +12,9 @@
     // Install ZPM
     set $namespace="%SYS", name="DefaultSSL" do:'##class(Security.SSLConfigs).Exists(name) ##class(Security.SSLConfigs).Create(name) set url="https://pm.community.intersystems.com/packages/zpm/latest/installer" Do ##class(%Net.URLParser).Parse(url,.comp) set ht = ##class(%Net.HttpRequest).%New(), ht.Server = comp("host"), ht.Port = 443, ht.Https=1, ht.SSLConfiguration=name, st=ht.Get(comp("path")) quit:'st $System.Status.GetErrorText(st) set xml=##class(%File).TempFilename("xml"), tFile = ##class(%Stream.FileBinary).%New(), tFile.Filename = xml do tFile.CopyFromAndSave(ht.HttpResponse.Data) do ht.%Close(), $system.OBJ.Load(xml,"ck") do ##class(%File).Delete(xml)
 
-    zn "USER"
-    // Load ObjectScript source files
+    // Load ObjectScript source files and data into Coin class
+    set $namespace = "USER"
     zw $SYSTEM.OBJ.ImportDir("/opt/irisapp/src", "*.cls", "cubk", .tErrors, 1)
-    // Install csvgen package
-    zpm "install csvgen"
-    // Load XRP data
-    do ##class(community.csvgen).Generate("/opt/irisapp/misc/XRP-GBP.csv",,"ObjectScript.Coin")
+    do $SYSTEM.SQL.Execute("LOAD DATA FROM FILE '/opt/irisapp/misc/XRP-GBP.csv' INTO ObjectScript.Coin")
 
-    h
+    halt
