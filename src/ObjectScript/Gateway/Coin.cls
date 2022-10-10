@@ -1,4 +1,4 @@
-Class ObjectScript.Gateway.Crypto
+Class ObjectScript.Gateway.Coin
 {
 
 ClassMethod GetCoinValues()
@@ -9,7 +9,7 @@ ClassMethod GetCoinValues()
     set pyGate = $system.external.getPythonGateway()
 
     // Add Crypto.py path to the gateway
-    do pyGate.addToPath("/irisdev/app/src/Python/gateway/Crypto.py")
+    do pyGate.addToPath("/irisdev/app/src/Python/gateway/Coin.py")
 
     // Create the proxy object for the instantiated object
     set objectBase = ##class(%Net.Remote.Object).%New(pyGate,"coin")
@@ -24,7 +24,7 @@ ClassMethod GetCoinValues()
     set Volume = objectBase.Volume
 
     // Write result
-    w "Date: "_Date w "Open: "_Open w "High: "_High w "Low: "_Low w "Close_:"_Close w "Volume: "_Volume
+    w !,"Date: "_Date,! w "Open: "_Open,! w "High: "_High,! w "Low: "_Low,! w "Close: "_Close,! w "Volume: "_Volume,!
     
     // Persisting the data for later
     set coin = ##class(ObjectScript.Coin).%New()
@@ -35,7 +35,7 @@ ClassMethod GetCoinValues()
     set coin.Close = Close
     set coin.Volume = Volume
     do coin.%Save()
-    write "Values saved."
+    write !,"Values saved."
 
     return sc
 }

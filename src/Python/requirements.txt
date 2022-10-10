@@ -2,4 +2,4 @@ numpy
 pandas
 networkx
 matplotlib
-cryptocmd
+pmdarima

@@ -17,13 +17,13 @@ testem.log
 /typings
 Network.png
 /irisdev/app/Network.png
+CoinGraph.png
+/irisdev/app/CoinGraph.png
 
 # System Files
 .DS_Store
 Thumbs.db
 iris/key/iris.key
-
-#python
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

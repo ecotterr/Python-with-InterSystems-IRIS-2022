@@ -15,6 +15,6 @@
     // Load ObjectScript source files and data into Coin class
     set $namespace = "USER"
     zw $SYSTEM.OBJ.ImportDir("/opt/irisapp/src", "*.cls", "cubk", .tErrors, 1)
-    do $SYSTEM.SQL.Execute("LOAD DATA FROM FILE '/opt/irisapp/misc/XRP-GBP.csv' INTO ObjectScript.Coin")
+    do $SYSTEM.SQL.Execute("LOAD DATA FROM FILE '/opt/irisapp/misc/CoinData.csv' INTO ObjectScript.Coin")
 
     halt
