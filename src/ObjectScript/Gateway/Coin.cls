@@ -28,12 +28,12 @@ ClassMethod GetCoinValues()
     
     // Persisting the data for later
     set coin = ##class(ObjectScript.Coin).%New()
-    set coin.Date = Date
-    set coin.Open = Open
-    set coin.High = High
-    set coin.Low = Low
-    set coin.Close = Close
-    set coin.Volume = Volume
+    set coin.CoinDate = Date
+    set coin.PriceOpen = Open
+    set coin.PriceHigh = High
+    set coin.PriceLow = Low
+    set coin.PriceClose = Close
+    set coin.TradeVolume = Volume
     do coin.%Save()
     write !,"Values saved."
 

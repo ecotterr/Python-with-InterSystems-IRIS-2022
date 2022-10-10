@@ -15,6 +15,8 @@ cursor.execute(f"SELECT * FROM {table}")
 
 # Construct Pandas dataframe from result
 df = pd.DataFrame(cursor.fetchall())
+cursor.close()
+conn.commit()
 df = df.rename(columns={0:'ID',1:'Date',2:'Open',3:'High',4:'Low',5:'Close',6:'Volume'})
 df = df.astype({'ID':'int','Date':'str','Open':'float','High':'float','Low':'float','Close':'float','Volume':'int'})
 print(df)
@@ -31,18 +33,22 @@ print("\nGraph image saved to irisdev/app/CoinGraph.png")
 df.index = pd.to_datetime(df['Date'], format='%d/%m/%Y')
 training_y = df.iloc[0:,2]
 training_x = df.iloc[0:,1]
-model = auto_arima(y = training_y, x = training_x,m = 30)
 print("\nTraining model...")
+model = auto_arima(y = training_y, x = training_x,m = 30)
 recent_date = datetime.datetime.strptime(df['Date'].iloc[-1], '%d/%m/%Y')
 new_date = (recent_date + datetime.timedelta(days=1)).strftime('%d/%m/%Y')
 prediction = pd.Series(model.predict(n_periods = 1, X = new_date))
-new_date = prediction[0].strftime('%d/%m/%Y')
-new_open = prediction[1]
-print(f"\nDate Prediction: {new_date} \nOpen Prediction: {new_open}")
+new_open = prediction[0]
+print(f"\n-- Prediction -- \nDate: {new_date} \nOpen: {new_open} \n")
+new_open = float(new_open)
+new_date = str(new_date)
 
 # Save our new prediction back into our IRIS table:
-
+# cursor = conn.cursor()
+# query = f"INSERT INTO {table} (CoinDate, PriceOpen, PriceHigh, PriceLow, PriceClose) VALUES ({new_date}, {new_open}, {new_open}, {new_open}, {new_open}, {new_open})"
+# cursor.execute(query)
+# print(f"\nPrediction saved into {table} successfully!")
+# cursor.close()
 
 # Closing IRIS connection
-cursor.close()
 conn.close()
