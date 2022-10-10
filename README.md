@@ -49,48 +49,11 @@ To view the data now in globals:
 
 2. ```do ##class(ObjectScript.Embedded.Networks).ShowNetwork()```
 
-In section 3.4, we will access these globals with the Native API...
+In section 3.2, we will access these globals with the Native API...
 
 Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AFL_epython 
 
-## 3.2. DB-API
-*src > Python > db-api > dbapi.py*
-
-This .py demonstrates how to:
-* Create DB-API connection to IRIS
-* Create a table with a cursor object
-* Generate data in Python and insert with SQL
-
-To run this, go to the container command line and run:
-1. ```cd /src/Python/db-api```
-2. ```python3 dbapi.py```
-
-You can view the results of the script in the System Explorer tab of the Management Portal.
-
-Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BTPI_pyapi
-
-## 3.3. Python Gateway
-*src > ObjectScript > Gateway > Python.cls*
-
-The Demo() ClassMethod of this Class shows step-by-step how to:
-* Create a Python Gateway connection to IRIS
-* Add a .py file to the Gateway paths
-* Create proxy objects from Python objects
-* Access properties of the proxy objects with ObjectScript
-
-To run this, go to the container command line and run:
-1. ```irissession IRIS```
-
-Ensure you are in the USER namespace with ```set $namespace = "USER"```
-
-2. ```do ##class(Gateway.Python).Demo()```
-
-You can then exit the IRIS terminal with ```halt```
-
-Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BEXTSERV_intro
-
-
-## 3.4. Native API
+## 3.2. Native API
 *src > Python > native > Networks.py*
 
 We now use the Native API to access the network globals created with Embedded Python and generate PNG files to illustrate the graphs.
@@ -104,6 +67,40 @@ The graph image will have been saved in /irisdev/app/Network.png and can be copi
 ```docker cp <containerId>:/irisdev/app/Network.png /Your-Local-Path/Network.png```
 
 Documentation: https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=PAGE_python_native&ADJUST=1
+
+## 3.3. Python Gateway
+*src > ObjectScript > Gateway > Coin.cls*
+
+The GetCoinValues() ClassMethod of this Class shows step-by-step how to:
+* Create a Python Gateway connection to IRIS
+* Add a .py file to the Gateway paths
+* Instantiate Python classes from ObjectScript
+* Access properties of the proxy objects with ObjectScript
+
+To run this, go to the container command line and run:
+1. ```irissession IRIS```
+2. ```do ##class(ObjectScript.Gateway.Coin).GetCoinValues()```
+
+You can then exit the IRIS terminal with ```halt```
+
+Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BEXTSERV_intro
+
+## 3.4. DB-API
+*src > Python > db-api > CoinGraph.py*
+
+This .py shows how to:
+* Create a connection to IRIS for SQL-based access
+* Use a cursor object to execute queries
+* Access query results and convert to a Pandas dataframe
+* Insert results back into IRIS via SQL
+
+To run this, in the container command line:
+1. ```cd src/Python/db-api```
+2. ```python3 CoinGraph.py```
+
+This script selects the coin values, plots them and saves the image to irisdev/app/CoinGraph.png and then uses an ARIMA to perform time series forecasting, and predict the open price for the following day. It then saves this new value in our table ObjectScript.Coin and the CoinGraph.py can be performed iteratively. Note: this is not a very good prediction.
+
+Documentation: https://docs.intersystems.com/iris20221/csp/docbook/Doc.View.cls?KEY=BTPI_pyapi
 
 # Notes
 Thanks go to Guillaume Rongier @grongierisc for his many Python demos, upon which this was built, as well as Yuhang Xia for some of the networkx code.
