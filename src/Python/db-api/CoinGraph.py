@@ -34,20 +34,20 @@ df.index = pd.to_datetime(df['Date'], format='%d/%m/%Y')
 training_y = df.iloc[0:,2]
 training_x = df.iloc[0:,1]
 print("\nTraining model...")
-model = auto_arima(y = training_y, x = training_x,m = 30)
+model = auto_arima(y = training_y, x = training_x,m = 7)
 recent_date = datetime.datetime.strptime(df['Date'].iloc[-1], '%d/%m/%Y')
 new_date = (recent_date + datetime.timedelta(days=1)).strftime('%d/%m/%Y')
 prediction = pd.Series(model.predict(n_periods = 1, X = new_date))
 new_open = prediction[0]
 print(f"\n-- Prediction -- \nDate: {new_date} \nOpen: {new_open} \n")
 new_open = float(new_open)
-new_date = str(new_date)
 
 # Save our new prediction back into our IRIS table:
-# cursor = conn.cursor()
-# query = f"INSERT INTO {table} (CoinDate, PriceOpen, PriceHigh, PriceLow, PriceClose) VALUES ({new_date}, {new_open}, {new_open}, {new_open}, {new_open}, {new_open})"
-# 
-# cursor.close()
+cursor = conn.cursor()
+query = f"INSERT INTO {table} (CoinDate, PriceOpen, PriceHigh, PriceLow, PriceClose, TradeVolume) VALUES ('{new_date}', {new_open}, {new_open}, {new_open}, {new_open}, 0)"
+cursor.execute(query) 
+cursor.close()
+
 
 # Closing IRIS connection
 conn.close()

@@ -13,8 +13,6 @@ Property PriceClose As %Numeric [ SqlColumnNumber = 6 ];
 
 Property TradeVolume As %Numeric [ SqlColumnNumber = 7 ];
 
-Index DateIdx On CoinDate [ Unique ];
-
 Storage Default
 {
 <Data name="CoinDefaultData">
