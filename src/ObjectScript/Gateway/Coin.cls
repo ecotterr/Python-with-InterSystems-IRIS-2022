@@ -8,7 +8,7 @@ ClassMethod GetCoinValues()
     // Creating default Python gateway connection
     set pyGate = $system.external.getPythonGateway()
 
-    // Add Crypto.py path to the gateway
+    // Add Coin.py path to the gateway
     do pyGate.addToPath("/irisdev/app/src/Python/gateway/Coin.py")
 
     // Create the proxy object for the instantiated object

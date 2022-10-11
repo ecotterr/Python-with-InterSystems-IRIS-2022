@@ -30,11 +30,11 @@ while key != None:
     neighbour_list_all.append(json.loads(neighbour_list))
     # Using the nextSubscript() method to traverse the sibling nodes of ^nodeGlobal(0) in ascending order (works like $order in ObjectScript)
     key = myIris.nextSubscript(False,f"^nodeGlobal({i})") # if key == None, there are no more sibling nodes
+                                                          # 'False' refers to the boolean of descending order
     print("Node " + str(i) + " has neighbours: " + str(neighbour_list))
     i += 1
 print("Found " + str(i) + " nodes!")
 
-print("\n" + str(neighbour_list_all))
 # Recreating the network:
 # Thanks to Yuhang Xia for the following code and expertise on networkx
 

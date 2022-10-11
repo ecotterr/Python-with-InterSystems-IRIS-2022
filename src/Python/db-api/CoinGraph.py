@@ -46,8 +46,7 @@ new_date = str(new_date)
 # Save our new prediction back into our IRIS table:
 # cursor = conn.cursor()
 # query = f"INSERT INTO {table} (CoinDate, PriceOpen, PriceHigh, PriceLow, PriceClose) VALUES ({new_date}, {new_open}, {new_open}, {new_open}, {new_open}, {new_open})"
-# cursor.execute(query)
-# print(f"\nPrediction saved into {table} successfully!")
+# 
 # cursor.close()
 
 # Closing IRIS connection
