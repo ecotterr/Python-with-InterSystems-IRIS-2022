@@ -1,7 +1,7 @@
 Class ObjectScript.Embedded.Networks
 {
 
-// Thanks to Yuhang Xia for the code to generate these networks.
+// Thanks to Yuhang Xia for the Python code to generate these networks.
 
 ClassMethod CreateNetwork(nodes As %Integer = 10) As %Status [ Language = python ]
 {

@@ -35,10 +35,12 @@ training_y = df.iloc[0:,2]
 training_x = df.iloc[0:,1]
 print("\nTraining model...")
 model = auto_arima(y = training_y, x = training_x,m = 7)
+# Selecting the 'most recent' date in the dataframe
 recent_date = datetime.datetime.strptime(df['Date'].iloc[-1], '%d/%m/%Y')
+# Augmenting our most recent date by 1 day, to set the date of our prediction
 new_date = (recent_date + datetime.timedelta(days=1)).strftime('%d/%m/%Y')
 prediction = pd.Series(model.predict(n_periods = 1, X = new_date))
-new_open = prediction[0]
+new_open = prediction[0] # 0th element is our predicted Open price
 print(f"\n-- Prediction -- \nDate: {new_date} \nOpen: {new_open} \n")
 new_open = float(new_open)
 
@@ -47,7 +49,6 @@ cursor = conn.cursor()
 query = f"INSERT INTO {table} (CoinDate, PriceOpen, PriceHigh, PriceLow, PriceClose, TradeVolume) VALUES ('{new_date}', {new_open}, {new_open}, {new_open}, {new_open}, 0)"
 cursor.execute(query) 
 cursor.close()
-
 
 # Closing IRIS connection
 conn.close()
